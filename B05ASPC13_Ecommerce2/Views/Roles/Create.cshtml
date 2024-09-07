@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (@ViewBag.ErrorMessage!=null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.ErrorMessage</strong>.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    
+}
+<form  method="post"  asp-controller="Roles" asp-action="Create">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Role Name</label>
+        <input type="text" name="RoleName" class="form-control"    
+        aria-describedby="emailHelp" placeholder="Enter role name">
+
+    </div>
+   
+    <button type="submit" class="btn btn-primary mt-5">Submit</button>
+</form>
+<a asp-action="Index" asp-controller="Roles" title="add new Role">
+    <i class="fa fa-brifcase"></i>Back to list
+</a>

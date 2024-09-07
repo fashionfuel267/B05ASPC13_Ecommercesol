@@ -1,0 +1,20 @@
+﻿@model IEnumerable< Microsoft.AspNetCore.Identity.IdentityRole>;
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<a  asp-action="Create" asp-controller="Roles" title="add new Role">
+    <i class="fa fa-plus"></i>Add
+    </a>
+<ul class="list-group">
+    @foreach(var item in Model)
+    {
+        <li class="list-group-item">@item.Name
+            <a href="/roles/Edit/@item.Id" title="Edit"> <i class="fa fa-edit"></i></a>||
+            <a href="/roles/Delete/@item.Id" title="Delete">
+                <i class="fa fa-trash"></i>
+            </a>
+        </li>
+        
+    }
+     
+</ul>

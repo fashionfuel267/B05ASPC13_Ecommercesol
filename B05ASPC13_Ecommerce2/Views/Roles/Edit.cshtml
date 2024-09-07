@@ -1,0 +1,26 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityRole
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (@ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.ErrorMessage</strong>.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+}
+<form method="post" asp-controller="Roles" asp-action="Edit">
+    <div class="form-group">
+        <input type="hidden"  class="form-control" asp-for="Id">
+        <label for="exampleInputEmail1">Role Name</label>
+        <input type="text"   class="form-control" asp-for="Name"
+               aria-describedby="emailHelp" placeholder="Enter role name">
+
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-5">Update</button>
+</form>
+<a asp-action="Index" asp-controller="Roles" title="add new Role">
+    <i class="fa fa-brifcase"></i>Back to list
+</a>
