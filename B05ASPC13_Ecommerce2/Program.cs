@@ -2,6 +2,7 @@ using B05ASPC13_Ecommerce2.Data;
 using B05ASPC13_Ecommerce2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,14 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(op =>
     op.Password.RequireDigit = false;
 }).AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+builder.Services.ConfigureApplicationCookie(options => {
+    options.LoginPath = new PathString("/Identity/Account/Login");
+    options.ReturnUrlParameter = "ReturnUrl";
+    options.LogoutPath = new PathString("/Identity/Account/Lockout");
+    options.AccessDeniedPath = new PathString("/Identity/Account/AccessDenied");
+    options.ExpireTimeSpan = TimeSpan.FromDays(1);
+});
+
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 
