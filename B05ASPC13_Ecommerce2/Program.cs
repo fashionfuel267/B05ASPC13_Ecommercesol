@@ -29,12 +29,17 @@ builder.Services.ConfigureApplicationCookie(options => {
     options.AccessDeniedPath = new PathString("/Identity/Account/AccessDenied");
     options.ExpireTimeSpan = TimeSpan.FromDays(1);
 });
-
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = ".AdventureWorks.Session";
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.IsEssential = true;
+});
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
+app.UseSession();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

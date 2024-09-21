@@ -14,5 +14,9 @@ namespace B05ASPC13_Ecommerce2.Data
         {
             base.OnModelCreating(builder);
         }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Instructor> Instructors { get; set; }
+        public DbSet<CourseInstructor> CourseInstructor { get; set; }
     }
 }
