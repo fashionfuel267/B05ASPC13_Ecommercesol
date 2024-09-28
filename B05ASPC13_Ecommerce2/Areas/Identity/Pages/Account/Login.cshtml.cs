@@ -92,7 +92,7 @@ namespace B05ASPC13_Ecommerce2.Areas.Identity.Pages.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            returnUrl ??= Url.Content("~/");
+            //returnUrl ??= Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -104,7 +104,7 @@ namespace B05ASPC13_Ecommerce2.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            //returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -116,7 +116,16 @@ namespace B05ASPC13_Ecommerce2.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    if (returnUrl != null)
+                    { return LocalRedirect(returnUrl); }
+                    else if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else if (User.IsInRole("Teacher")) {
+                        return RedirectToAction("Dashboard", "Teacher");
+                    }
+                    
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -125,6 +134,7 @@ namespace B05ASPC13_Ecommerce2.Areas.Identity.Pages.Account
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
+
                     return RedirectToPage("./Lockout");
                 }
                 else
