@@ -66,7 +66,8 @@ namespace B05ASPC13_Ecommerce2.Controllers
                        join r in _context.Roles
                        on ur.RoleId equals r.Id
                        select new USerwithRole
-                       { Email=u.Email,
+                       { 
+                           Email=u.Email,
                        FullName=u.FullName,
                        ProfilePic=u.ProfilePic,
                        Role=r.Name??"Not assigned"

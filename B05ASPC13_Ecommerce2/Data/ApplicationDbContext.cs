@@ -18,5 +18,7 @@ namespace B05ASPC13_Ecommerce2.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<CourseInstructor> CourseInstructor { get; set; }
+        public DbSet<CourseSection> CourseSections { get; set; }
+        public DbSet<CourseLesson> CourseLessons { get; set; }
     }
 }
